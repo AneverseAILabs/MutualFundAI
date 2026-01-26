@@ -5,9 +5,17 @@ from dotenv import load_dotenv
 
 # -------- Load API Key --------
 load_dotenv()
-key='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'
-client = OpenAI(api_key=key)
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
 
+key =  st.secrets.get("OPENAI_API_KEY")
+
+if not key:
+    st.error("❌ OpenAI API key not found")
+    st.stop()
+
+client = OpenAI(api_key=key)
 # -------- Page Config --------
 st.set_page_config(page_title="Mutual Fund News & Insights", layout="wide")
 
